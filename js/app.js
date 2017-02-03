@@ -1,11 +1,36 @@
 
-var questions = [['name of country' ,'pakistan' ,'multan','england','A']] ;
-var data = 'sfdsafa';
+var questions = [
+    ['name of country' ,'pakistan' ,'multan','england','A'],
+    ['sadsa','sdas','fasf','asf','B'],
+] ;
+
+var pos = 0;
+
 
 
 var quizRender = React.createClass({
       
 
+
+     getInitialState: function(){
+         return{
+             quesion: this.props.data[pos][0],
+             opt1: this.props.data[pos][1],
+             opt2: this.props.data[pos][2],
+             opt3: this.props.data[pos][3],
+         }
+     },
+  
+     _checkAnswer: function(e){
+          pos++;
+          this.setState({
+             quesion: this.props.data[pos][0],
+             opt1: this.props.data[pos][1],
+             opt2: this.props.data[pos][2],
+             opt3: this.props.data[pos][3],
+          })
+
+     },
      render: function(){
          return React.DOM.div(
              null,
@@ -21,7 +46,7 @@ var quizRender = React.createClass({
                      
                      React.DOM.div(
                          null,
-                         React.DOM.h1(null, this.props.data[0][0]),
+                         React.DOM.h1(null, this.state.quesion),
                          React.DOM.div(
                              null,
                              React.DOM.input(
@@ -30,26 +55,28 @@ var quizRender = React.createClass({
                                     name: 'answer'
                                  }
                              ),
-                              this.props.data[0][1],
+                              this.state.opt1,
                               React.DOM.input(
                                  {
                                     type: "radio",
                                     name: 'answer',
+
                                    
                                  }
                              ),
-                             this.props.data[0][2],
+                             this.state.opt2,
                               React.DOM.input(
                                  {
                                     type: "radio",
                                     name: 'answer'
                                  }
                              ),
-                             this.props.data[0][3]
+                             this.state.opt3
                          ),
                          React.DOM.button(
                                  {
-                                    type: "button"
+                                    type: "button",
+                                    onClick: this._checkAnswer
                                  },
                                  'NEXT'
                              )
