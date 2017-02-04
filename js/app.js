@@ -1,13 +1,14 @@
 
 var questions = [
-    ["React.DOM.h1(  {id: 'my-heading'}, React.DOM.span(null, React.DOM.em(null, 'Hell'), 'o' ),' world!'), Which is Equal??",'pakistan' ,'multan','england','A'],
-    ['sadsa','sdas','fasf','asf','B'],
-    ['name of country' ,'pakistan' ,'multan','england','A'],
-    ['sadsa','sdas','fasf','asf','B']
+    ["What is part of a database that holds only one type of information???",'Report' ,'Field','File','B'],
+    ['OS computer abbreviation usually means ???','return an element of children ','Open Software ','Optical Sensor','Operating System','C'],
+    ['Which is a type of Electrically-Erasable Programmable Read-Only Memory?' ,'Flash','FRAM','Flange','A'],
+    ['Who developed Yahoo?','Vint Cerf & Robert Kahn','Steve Case & Jeff Bezos','David Filo & Jerry Yang','C'],
+    ['The most common format for a home video recorder is VHS. VHS stands for...??','Video Home System','Very high speed','Voltage house standard','A']
 
 ] ;
 
-var pos = 0, correct = 0 , choice ,percentage;
+var  pos = 0, correct = 0 , choice ,percentage;
 
 
 
@@ -17,6 +18,8 @@ var quizRender = React.createClass({
 
      getInitialState: function(){
          return{
+             correct: this.props.correct,
+             pos: this.props.pos,
              quesion: this.props.data[pos][0],
              opt1: this.props.data[pos][1],
              opt2: this.props.data[pos][2],
@@ -34,23 +37,33 @@ var quizRender = React.createClass({
           }
        }
             if(choice == this.props.data[pos][4]){
-                correct++;
+                this.setState({
+                    correct: correct++,
+                })
                 
             }
-          
           this.setState({
+            pos: ++pos,
+          }) 
+          if(pos < this.props.data.length){
+              this.setState({
+               
              quesion: this.props.data[pos][0],
              opt1: this.props.data[pos][1],
              opt2: this.props.data[pos][2],
              opt3: this.props.data[pos][3],
              ans: this.props.data[pos][4],
-          })
-          pos++;
+            
+        })
+          }
+       
+          
+        
 
      },
      _showQuestion: function(){
-           console.log(pos);
-            if(pos >= 4){
+           
+            if(this.state.pos >= this.props.data.length){
                percentage = correct*20;
               return React.DOM.div(
                     {
@@ -73,12 +86,12 @@ var quizRender = React.createClass({
                              {
                                  id:'status'
                              },
-                            React.DOM.h1(null,"QUESTION "+ (pos+1) +" OF " +this.props.data.length )
+                            React.DOM.h1(null,"QUESTION "+ (this.state.pos+1) +" OF " +this.props.data.length )
                           ),
                          React.DOM.h4(
                              {
                                  id:'question'
-                             }, (pos+1) +'.  '+this.state.quesion),
+                             }, (this.state.pos+1) +'.  '+this.state.quesion),
                          React.DOM.div(
                              null,
                              React.DOM.input(
@@ -154,6 +167,8 @@ ReactDOM.render(
        React.createElement(quizRender,
        {
            data: questions,
+           pos: pos,
+           correct: correct,
        }
        )
     ),
