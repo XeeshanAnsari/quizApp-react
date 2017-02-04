@@ -1,7 +1,7 @@
 
 var questions = [
     ["What is part of a database that holds only one type of information???",'Report' ,'Field','File','B'],
-    ['OS computer abbreviation usually means ???','return an element of children ','Open Software ','Optical Sensor','Operating System','C'],
+    ['OS computer abbreviation usually means ???','Open Software ','Optical Sensor','Operating System','C'],
     ['Which is a type of Electrically-Erasable Programmable Read-Only Memory?' ,'Flash','FRAM','Flange','A'],
     ['Who developed Yahoo?','Vint Cerf & Robert Kahn','Steve Case & Jeff Bezos','David Filo & Jerry Yang','C'],
     ['The most common format for a home video recorder is VHS. VHS stands for...??','Video Home System','Very high speed','Voltage house standard','A']
